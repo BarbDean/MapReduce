@@ -13,6 +13,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.fs.FileSystem;
 
 
 public class WordCountPlus extends Configured implements Tool {
@@ -37,10 +38,17 @@ public class WordCountPlus extends Configured implements Tool {
        job.setOutputKeyClass(Text.class);
        job.setOutputValueClass(IntWritable.class);
 
-       String inputPath = conf.get("wordcountplus.inputPath");
-       String outputPath = conf.get("wordcountplus.outputPath");
-       FileInputFormat.addInputPath(job,   new Path(inputPath));
-       FileOutputFormat.setOutputPath(job, new Path(outputPath));
+       Path inputPath  = new Path(conf.get("wordcountplus.inputPath"));
+       Path outputPath = new Path(conf.get("wordcountplus.outputPath"));
+
+       // Hadoop does not let us overwrite, so explicitly remove old output
+       FileSystem fs = FileSystem.get(conf);
+       if(fs.exists(outputPath)) {
+          fs.delete(outputPath);
+       }
+
+       FileInputFormat.addInputPath(job,   inputPath);
+       FileOutputFormat.setOutputPath(job, outputPath);
 
        return(job.waitForCompletion(true) ? 0 : 1);
     }
