@@ -20,14 +20,27 @@ public class WordCountPlus extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception
     {
+
+       Long tick = System.nanoTime();
+       
        Configuration conf = new Configuration();
        Integer exitCode = ToolRunner.run(new WordCountPlus(),args);
+       Long tock = System.nanoTime();
+
+       Double elapsed = ((tock - tick)/1.0e9)/60.0;
+       String outLine = "\n************************** ";
+       outLine += "Elapsed time in minutes is: " + elapsed;
+       outLine += " **************************\n ";
+       System.out.println(outLine);
+
        System.exit(exitCode);
     }
 
 
     @Override
     public int run(String[] args) throws Exception {
+
+
        Configuration conf = getConf();
  
        Job job = new Job(conf, "wordcountplus");
