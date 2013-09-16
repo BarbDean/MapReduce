@@ -1,0 +1,2 @@
+
+$HADOOP_HOME/bin/hadoop  jar target/hadoop-examples-bd-1.0.jar com/barbdean/examples/wordcountplus/WordCountPlus -conf config.xml
