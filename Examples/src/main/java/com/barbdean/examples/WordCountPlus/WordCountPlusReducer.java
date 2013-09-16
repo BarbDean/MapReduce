@@ -1,10 +1,8 @@
 package com.barbdean.examples.wordcountplus;
 
 import java.io.IOException;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class WordCountPlusReducer
@@ -17,7 +15,7 @@ public class WordCountPlusReducer
 
       context.getCounter("Reducer","NumberOfReduceCalls").increment(1);
 
-      int sum = 0;
+      Integer sum = 0;
       for (IntWritable val : values) {
         sum += val.get();
       }

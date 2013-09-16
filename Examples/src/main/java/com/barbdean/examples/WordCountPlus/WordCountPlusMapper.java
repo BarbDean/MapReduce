@@ -3,8 +3,6 @@ package com.barbdean.examples.wordcountplus;
 import java.util.StringTokenizer;
 import java.io.IOException;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 

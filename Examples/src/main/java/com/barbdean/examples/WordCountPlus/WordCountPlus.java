@@ -1,5 +1,13 @@
 package com.barbdean.examples.wordcountplus;
 
+// Standard word count that is found everywhere except:
+// -- Uses ToolRunner.
+// -- Adds a few dynamic counters
+// -- Does some FileSystem jazz to ensure we can write
+// -- Prints a total execution time.
+// -- Builds using maven
+// -- Uses a custom config file
+
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -39,7 +47,6 @@ public class WordCountPlus extends Configured implements Tool {
 
     @Override
     public int run(String[] args) throws Exception {
-
 
        Configuration conf = getConf();
  
