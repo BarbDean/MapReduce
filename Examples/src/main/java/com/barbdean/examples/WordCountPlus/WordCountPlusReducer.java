@@ -1,7 +1,6 @@
 package com.barbdean.examples.wordcountplus;
 
 import java.io.IOException;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -15,6 +14,9 @@ public class WordCountPlusReducer
 
     public void reduce(Text key, Iterable<IntWritable> values,
                        Context context) throws IOException, InterruptedException {
+
+      context.getCounter("Reducer","NumberOfReduceCalls").increment(1);
+
       int sum = 0;
       for (IntWritable val : values) {
         sum += val.get();

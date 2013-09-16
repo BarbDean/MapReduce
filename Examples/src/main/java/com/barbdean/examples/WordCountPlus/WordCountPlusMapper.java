@@ -17,8 +17,11 @@ public class WordCountPlusMapper
     public void map(Object key, Text value, 
                     Context context) throws IOException, InterruptedException {
 
+      context.getCounter("Mapper","NumberOfMapperCalls").increment(1);
+
       StringTokenizer itr = new StringTokenizer(value.toString());
       while (itr.hasMoreTokens()) {
+        context.getCounter("Mapper","LoopCalls").increment(1);
         word.set(itr.nextToken());
         context.write(word, ONE);
       }
